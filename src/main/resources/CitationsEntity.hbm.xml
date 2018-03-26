@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="webapp.entities.CitationsEntity" table="citations" schema="aware_schema" catalog="postgres">
+        <id name="citationId">
+            <column name="citation_id" sql-type="bigint"/>
+            <generator class="identity" />
+        </id>
+        <property name="text">
+            <column name="text" sql-type="varchar"/>
+        </property>
+        <property name="popularity">
+            <column name="popularity" sql-type="numeric" precision="-1" not-null="true"/>
+        </property>
+        <property name="name">
+            <column name="name" sql-type="varchar"/>
+        </property>
+        <property name="userId">
+            <column name="user_id" sql-type="bigint"/>
+        </property>
+        <property name="likes">
+            <column name="likes" sql-type="bigint"/>
+        </property>
+        <property name="dislikes">
+            <column name="dislikes" sql-type="bigint"/>
+        </property>
+    </class>
+</hibernate-mapping>

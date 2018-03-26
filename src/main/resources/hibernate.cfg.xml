@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name = "hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres?currentSchema=aware_schema</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">admin</property>
+        <mapping resource="CitationsEntity.hbm.xml"/>
+        <mapping class="webapp.entities.CitationsEntity"/>
+        <mapping class="webapp.entities.UsersEntity"/>
+        <mapping resource="UsersEntity.hbm.xml"/>
+        <mapping class="webapp.entities.UsersCitationsEntity"/>
+        <mapping resource="UsersCitationsEntity.hbm.xml"/>
+        <mapping class="webapp.entities.CommentsEntity"/>
+        <mapping resource="CommentsEntity.hbm.xml"/>
+        <mapping class="webapp.entities.DislikesEntity"/>
+        <mapping resource="DislikesEntity.hbm.xml"/>
+        <mapping resource="LikesEntity.hbm.xml"/>
+        <mapping class="webapp.entities.LikesEntity"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

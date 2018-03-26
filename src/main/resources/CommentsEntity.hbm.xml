@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="webapp.entities.CommentsEntity" table="comments" schema="aware_schema" catalog="postgres">
+        <id name="commentId">
+            <column name="comment_id" sql-type="bigint"/>
+            <generator class="identity"></generator>
+        </id>
+        <property name="citationId">
+            <column name="citation_id" sql-type="bigint"/>
+        </property>
+        <property name="userId">
+            <column name="user_id" sql-type="bigint"/>
+        </property>
+        <property name="text">
+            <column name="text" sql-type="varchar"/>
+        </property>
+        <property name="commentDate">
+            <column name="comment_date" sql-type="date"/>
+        </property>
+    </class>
+</hibernate-mapping>
