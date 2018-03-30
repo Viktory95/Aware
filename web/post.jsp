@@ -1,5 +1,6 @@
 <%@ page import="webapp.servlets.PostServlet" %>
-<%@ page import="webapp.entities.CommentsEntity" %><%--
+<%@ page import="webapp.entities.CommentsEntity" %>
+<%@ page import="webapp.dbutils.Validate" %><%--
   Created by IntelliJ IDEA.
   User: Виктория
   Date: 24.03.2018
@@ -10,23 +11,38 @@
 <html>
 <head>
     <title>Post</title>
+    <jsp:include page="header.jsp"/>
 </head>
 <body>
-<form action="/post" method="post">
-    <tr>
-        <td><%= PostServlet.citationsEntity.getName() %></td>
-        <td><%= PostServlet.citationsEntity.getText() %></td>
-        <td>Likes count = <%= PostServlet.citationsEntity.getLikes() %></td>
-        <td>Dislikes count = <%= PostServlet.citationsEntity.getDislikes() %></td>
-        <td><input type="submit" value="Like" name="like"/></td>
-        <td><input type="submit" value="Dislike" name="dislike"/></td>
-        Comment: <input type="text" name="comm" width="300"/>
-        <td><input type="submit" value="Comment" name="comment"/></td>
-        <% for(CommentsEntity commentsEntity : PostServlet.getComments()){ %>
-        <td><%= commentsEntity.getText()%></td>
+<div id="content">
+    <form action="/post" method="post">
+        <label>
+            <p><b><%= PostServlet.citationsEntity.getName() %>
+            </b></p>
+            <p><%= PostServlet.citationsEntity.getText() %>
+            </p>
+            <p>Likes = <%= PostServlet.citationsEntity.getLikes() %>        Dislikes
+                = <%= PostServlet.citationsEntity.getDislikes() %>
+            </p>
+        </label>
+        <input type="submit" value="Like" name="like"/>
+        <input type="submit" value="Dislike" name="dislike"/>
+        <label><p><b>Comment</b></p></label>
+        <input type="text" name="comm" width="300"/>
+        <input type="submit" value="Comment" name="comment"/>
+        <label><p><b>Comments:</b></p></label>
+        <% for (CommentsEntity commentsEntity : PostServlet.getComments()) { %>
+        <label><b><%= Validate.getUserName(commentsEntity.getUserId())%>
+        </b></label>
+        <label><p><%= commentsEntity.getText()%>
+        </p></label>
         <% } %>
-    </tr>
-
-</form>
+    </form>
+</div>
+<div id="copyright">
+    &copy; Aware, 2018</a>
+</div>
+</div>
+</div>
 </body>
 </html>

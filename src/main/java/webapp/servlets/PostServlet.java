@@ -143,4 +143,5 @@ public class PostServlet extends HttpServlet {
         listResult = query.list();
         return listResult;
     }
+
 }

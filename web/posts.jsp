@@ -10,20 +10,32 @@
 <html>
 <head>
     <title>Posts</title>
+    <jsp:include page="header.jsp"/>
 </head>
 <body>
+<div id="content">
     <form action="/posts" method="post">
         <%
             for (CitationsEntity citationsEntity : PostsServlet.getCitations()) {
         %>
-        <tr>
-            <td><%= citationsEntity.getName() %></td>
-            <td><%= citationsEntity.getText() %></td>
-            <td><input type="submit" value="Info" name=<%= citationsEntity.getCitationId() %>/></td>
-        </tr>
-        <%
-            }
-        %>
+        <div id="box2">
+            <label>
+                <p><b><%= citationsEntity.getName() %>
+                </b></p>
+                <p><%= citationsEntity.getText() %>
+                </p>
+            </label>
+            <input type="submit" value="Info" name=<%= citationsEntity.getCitationId() %>/>
+            <%
+                }
+            %>
+        </div>
     </form>
+</div>
+<div id="copyright">
+    &copy; Aware, 2018</a>
+</div>
+</div>
+</div>
 </body>
 </html>

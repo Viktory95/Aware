@@ -12,11 +12,24 @@
     <jsp:include page="header.jsp" />
 </head>
 <body>
-    <h1>Welcome, please login!</h1>
-    <form action="/login" method="post">
-        login-name: <input type="text" name="loginname" width="30"/>
-        password: <input type="password" name="password" width="10"/>
-        <input type="submit" value="Login"/>
-    </form>
+<div id="content">
+    <div id="box1">
+        <h1>Welcome, please login!</h1>
+        <form action="/login" method="post">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="loginname" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+    <div id="copyright">
+        &copy; Aware, 2018</a>
+    </div>
+    </div>
+    </div>
 </body>
 </html>

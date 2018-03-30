@@ -12,7 +12,6 @@
       <jsp:include page="header.jsp" />
   </head>
   <body>
-      <div id="main">
           <div id="content">
               <div id="box1">
                   <h2>
@@ -24,8 +23,11 @@
                       Желаем приятного и полезного времяпровождения с Aware!
                   </p>
               </div>
-              <br class="clear" />
           </div>
-  </div>
+          <div id="copyright">
+              &copy; Aware, 2018</a>
+          </div>
+      </div>
+      </div>
   </body>
 </html>

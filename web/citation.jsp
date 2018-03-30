@@ -9,12 +9,24 @@
 <html>
 <head>
     <title>Citation</title>
+    <jsp:include page="header.jsp"/>
 </head>
 <body>
-    <form action="/citation" method="post">
-        name: <input type="text" name="citation_name" width="30"/>
-        text: <input type="text" name="citation_text" width="10"/>
-        <input type="submit" value="Add"/>
-    </form>
+<div id="content">
+    <div id="box1">
+        <form action="/citation" method="post">
+            <label><b>Name</b></label>
+            <input type="text" name="citation_name" required>
+            <label><b>Text</b></label>
+            <input type="text" name="citation_text" required>
+            <input type="submit" value="Add"/>
+        </form>
+    </div>
+</div>
+<div id="copyright">
+    &copy; Aware, 2018</a>
+</div>
+</div>
+</div>
 </body>
 </html>

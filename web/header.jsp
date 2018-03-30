@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Home</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/style34.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="outer">
@@ -22,7 +22,7 @@
         <div id="nav">
             <ul>
                 <%
-                    if(Validate.usersEntity == null){
+                    if (Validate.usersEntity == null) {
                 %>
                 <li class="first">
                     <a href="login.jsp"> Login </a>
@@ -37,7 +37,7 @@
                     <a href="#">Contact Us</a>
                 </li>
                 <%
-                }else {
+                } else {
                 %>
                 <li class="first">
                     <a href="#">About Us</a>
@@ -50,7 +50,6 @@
                 </li>
                 <% } %>
             </ul>
-            <br class="clear" />
         </div>
     </div>
     <div id="main">
@@ -58,12 +57,9 @@
             <h3>
                 Меню
             </h3>
-            <p>
-                Цитата дня:
-            </p>
             <ul class="linkedList">
                 <%
-                    if(Validate.usersEntity != null){
+                    if (Validate.usersEntity != null) {
                 %>
                 <li class="first">
                     <a href="citation.jsp"> Добавить цитату </a>
@@ -82,9 +78,14 @@
                 %>
             </ul>
         </div>
-    </div>
-    <div id="copyright">
-        &copy; Aware, 2018</a>
-    </div>
+
+        <div id="sidebar2">
+            <p>
+                Цитата дня:
+            </p>
+            <p>
+                <%= Validate.getDayCitation().getText()%>
+            </p>
+        </div>
 </body>
 </html>

@@ -9,15 +9,29 @@
 <html>
 <head>
     <title>Registration</title>
+    <jsp:include page="header.jsp" />
 </head>
 <body>
+<div id="content">
+    <div id="box1">
     <h1>Welcome, please registration!</h1>
     <form action="/registration" method="post">
-        login-name: <input type="text" name="loginname" width="30"/>
-        e-mail: <input type="text" name="email" width="30">
-        password: <input type="password" name="password" width="20"/>
-        replace password: <input type="password" name="rppassword" width="20"/>
-        <input type="submit" value="Registration"/>
+        <label><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="loginname" required>
+        <label><b>E-mail</b></label>
+        <input type="text" placeholder="Enter e-mail" name="email" required>
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <label><b>Replace password</b></label>
+        <input type="password" placeholder="Enter Password" name="rppassword" required>
+        <button type="submit">Registration</button>
     </form>
+    </div>
+</div>
+<div id="copyright">
+    &copy; Aware, 2018</a>
+</div>
+</div>
+</div>
 </body>
 </html>
