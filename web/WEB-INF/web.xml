@@ -54,4 +54,24 @@
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>likesposts</servlet-name>
+        <servlet-class>webapp.servlets.LikesPostsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>likesposts</servlet-name>
+        <url-pattern>/likesposts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>popularposts</servlet-name>
+        <servlet-class>webapp.servlets.PopularPostsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>popularposts</servlet-name>
+        <url-pattern>/popularposts</url-pattern>
+    </servlet-mapping>
+
 </web-app>

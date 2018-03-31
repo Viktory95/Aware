@@ -27,5 +27,8 @@
         <property name="dislikes">
             <column name="dislikes" sql-type="bigint"/>
         </property>
+        <property name="language">
+            <column name="language" sql-type="varchar"/>
+        </property>
     </class>
 </hibernate-mapping>

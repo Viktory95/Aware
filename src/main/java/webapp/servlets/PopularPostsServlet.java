@@ -3,8 +3,8 @@ package webapp.servlets;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import webapp.dbutils.HibernateUtil;
+import webapp.dbutils.Validate;
 import webapp.entities.CitationsEntity;
-import webapp.entities.UsersEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.sql.Date;
 import java.util.Enumeration;
 import java.util.List;
 
-@WebServlet(name = "posts")
-public class PostsServlet extends HttpServlet {
+@WebServlet(name = "popularposts")
+public class PopularPostsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         long citationId = -1;
         Enumeration<String> cols = request.getParameterNames();
-        if (cols.hasMoreElements()) {
+        if(cols.hasMoreElements()){
             String col = cols.nextElement();
-            citationId = Long.valueOf(col.substring(0, col.length() - 1));
+            citationId = Long.valueOf(col.substring(0, col.length()-1));
         }
 
         try {
@@ -51,11 +48,11 @@ public class PostsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
     }
 
-    public static List<CitationsEntity> getCitations() {
+    public static List<CitationsEntity> getCitations(){
         List<CitationsEntity> listResult = null;
         Session session = HibernateUtil.getSession();
         session.getTransaction();
-        Query query = session.createQuery("from CitationsEntity");
+        Query query = session.createQuery("from CitationsEntity where likes > 0 order by likes desc");
         listResult = query.list();
         return listResult;
     }

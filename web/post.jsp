@@ -21,8 +21,9 @@
             </b></p>
             <p><%= PostServlet.citationsEntity.getText() %>
             </p>
-            <p>Likes = <%= PostServlet.citationsEntity.getLikes() %>        Dislikes
-                = <%= PostServlet.citationsEntity.getDislikes() %>
+            <p>Language - <%= PostServlet.citationsEntity.getLanguage()%>
+                Likes - <%= PostServlet.citationsEntity.getLikes() %>        Dislikes
+                - <%= PostServlet.citationsEntity.getDislikes() %>
             </p>
         </label>
         <input type="submit" value="Like" name="like"/>

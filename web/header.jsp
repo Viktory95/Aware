@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Home</title>
-    <link href="css/style34.css" rel="stylesheet" type="text/css">
+    <link href="css/style35.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="outer">
@@ -31,19 +31,19 @@
                     <a href="registration.jsp"> Registration </a>
                 </li>
                 <li>
-                    <a href="#">About Us</a>
+                    <a href="about.jsp">About Us</a>
                 </li>
                 <li class="last">
-                    <a href="#">Contact Us</a>
+                    <a href="contacts.jsp">Contact Us</a>
                 </li>
                 <%
                 } else {
                 %>
                 <li class="first">
-                    <a href="#">About Us</a>
+                    <a href="about.jsp">About Us</a>
                 </li>
                 <li>
-                    <a href="#">Contact Us</a>
+                    <a href="contacts.jsp">Contact Us</a>
                 </li>
                 <li class="last">
                     <a href="logout.jsp"> Logout </a>
@@ -68,10 +68,10 @@
                     <a href="posts.jsp"> Лента </a>
                 </li>
                 <li>
-                    <a href="#">Любимые посты</a>
+                    <a href="likesposts.jsp">Любимые посты</a>
                 </li>
                 <li class="last">
-                    <a href="#">Популярное</a>
+                    <a href="popularposts.jsp">Популярное</a>
                 </li>
                 <%
                     }

@@ -110,6 +110,7 @@ ul {
 	padding: 35px 0 65px 0;
 	text-align: center;
 	color: #896F6A;
+	float: bottom;
 }
 
 #copyright a {
@@ -317,20 +318,5 @@ button {
 }
 
 button:hover {
-	opacity: 0.8;
-}
-
-button1[type=submit] {
-	background-color: #997F7A;
-	color: white;
-	padding: 2px;
-	margin: 4px 0;
-	border: none;
-	cursor: pointer;
-	width: 50px;
-	height: 30px;
-}
-
-button1[type=submit]:hover {
 	opacity: 0.8;
 }

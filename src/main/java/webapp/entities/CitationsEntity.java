@@ -13,6 +13,15 @@ public class CitationsEntity {
     private long userId;
     private long likes;
     private long dislikes;
+    private String language;
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     public long getDislikes() {
         return dislikes;
