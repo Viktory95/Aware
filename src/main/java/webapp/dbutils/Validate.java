@@ -5,20 +5,25 @@ import org.hibernate.Session;
 import webapp.entities.CitationsEntity;
 import webapp.entities.UsersEntity;
 
+import java.security.MessageDigest;
 import java.util.List;
 
 public class Validate {
 
-    public static UsersEntity usersEntity = null;
-
     public static UsersEntity checkUser(String login, String pass) {
+        UsersEntity usersEntity = null;
         try {
-
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            byte[] bytes = messageDigest.digest(pass.getBytes("UTF-8"));
+            StringBuilder stringBuilder = new StringBuilder();
+            for(byte b : bytes){
+                stringBuilder.append(b);
+            }
             Session session = HibernateUtil.getSession();
             session.getTransaction();
             Query query = session.createQuery("from UsersEntity where login = :log and password = :pass");
             query.setParameter("log", login);
-            query.setParameter("pass", pass);
+            query.setParameter("pass", stringBuilder.toString());
             List<UsersEntity> listResult = query.list();
             usersEntity = listResult.isEmpty() ? null : listResult.get(0);
 

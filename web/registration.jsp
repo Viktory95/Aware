@@ -14,17 +14,17 @@
 <body>
 <div id="content">
     <div id="box1">
-    <h1>Welcome, please registration!</h1>
+    <h1>Добро пожаловать, пройдите регистрацию!</h1>
     <form action="/registration" method="post">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="loginname" required>
+        <label><b>Логин</b></label>
+        <input type="text" placeholder="Введите логин" name="loginname" required>
         <label><b>E-mail</b></label>
-        <input type="text" placeholder="Enter e-mail" name="email" required>
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-        <label><b>Replace password</b></label>
-        <input type="password" placeholder="Enter Password" name="rppassword" required>
-        <button type="submit">Registration</button>
+        <input type="text" placeholder="Введите e-mail" name="email" required>
+        <label><b>Пароль</b></label>
+        <input type="password" placeholder="Введите пароль" name="password" required>
+        <label><b>Пароль</b></label>
+        <input type="password" placeholder="Повторите пароль" name="rppassword" required>
+        <button type="submit">Регистрация</button>
     </form>
     </div>
 </div>

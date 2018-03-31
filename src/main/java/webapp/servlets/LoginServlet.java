@@ -20,6 +20,7 @@ import java.util.List;
 @WebServlet(name = "login")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         UsersEntity usersEntity = Validate.checkUser(request.getParameter("loginname"), request.getParameter("password"));
         if (usersEntity != null) {

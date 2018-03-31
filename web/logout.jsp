@@ -1,4 +1,6 @@
-<%@ page import="webapp.dbutils.Validate" %><%--
+<%@ page import="webapp.dbutils.Validate" %>
+<%@ page import="webapp.entities.UsersEntity" %>
+<%@ page import="webapp.dbutils.SessionKeys" %><%--
   Created by IntelliJ IDEA.
   User: Виктория
   Date: 31.03.2018
@@ -9,7 +11,9 @@
 <html>
 <head>
     <title>Logout</title>
-    <%Validate.usersEntity = null;%>
+    <%request.getSession(true)
+                .setAttribute(SessionKeys.USER_INFO, null);%>
+    <jsp:forward page="index.jsp"/>
     <jsp:include page="header.jsp"/>
 </head>
 <body>

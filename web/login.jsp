@@ -14,15 +14,15 @@
 <body>
 <div id="content">
     <div id="box1">
-        <h1>Welcome, please login!</h1>
+        <h1>Добро пожаловать, произведите вход!</h1>
         <form action="/login" method="post">
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="loginname" required>
+            <label><b>Логин</b></label>
+            <input type="text" placeholder="Введите логин" name="loginname" required>
 
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <label><b>Пароль</b></label>
+            <input type="password" placeholder="Введите пароль" name="password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit">Вход</button>
         </form>
     </div>
 </div>

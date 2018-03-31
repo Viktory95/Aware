@@ -3,11 +3,9 @@ package webapp.servlets;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import webapp.dbutils.HibernateUtil;
+import webapp.dbutils.SessionKeys;
 import webapp.dbutils.Validate;
-import webapp.entities.CitationsEntity;
-import webapp.entities.CommentsEntity;
-import webapp.entities.DislikesEntity;
-import webapp.entities.LikesEntity;
+import webapp.entities.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,20 +27,24 @@ public class PostServlet extends HttpServlet {
 
         LikesEntity likesEntity = new LikesEntity();
         likesEntity.setCitationId(citationsEntity.getCitationId());
-        likesEntity.setUserId(Validate.usersEntity.getUserId());
+        likesEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+                .getAttribute(SessionKeys.USER_INFO)).getUserId());
 
         Query likesQuery = session.createQuery("from LikesEntity where citationId = :citationId and userId = :userId");
         likesQuery.setParameter("citationId", citationsEntity.getCitationId());
-        likesQuery.setParameter("userId", Validate.usersEntity.getUserId());
+        likesQuery.setParameter("userId", UsersEntity.valueOf(request.getSession(true)
+                .getAttribute(SessionKeys.USER_INFO)).getUserId());
         List<LikesEntity> likesListResult = likesQuery.list();
 
         DislikesEntity dislikesEntity = new DislikesEntity();
         dislikesEntity.setCitationId(citationsEntity.getCitationId());
-        dislikesEntity.setUserId(Validate.usersEntity.getUserId());
+        dislikesEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+                .getAttribute(SessionKeys.USER_INFO)).getUserId());
 
         Query dislikesQuery = session.createQuery("from DislikesEntity where citationId = :citationId and userId = :userId");
         dislikesQuery.setParameter("citationId", citationsEntity.getCitationId());
-        dislikesQuery.setParameter("userId", Validate.usersEntity.getUserId());
+        dislikesQuery.setParameter("userId", UsersEntity.valueOf(request.getSession(true)
+                .getAttribute(SessionKeys.USER_INFO)).getUserId());
         List<DislikesEntity> dislikesListResult = dislikesQuery.list();
 
         if(request.getParameter("like") != null){
@@ -114,7 +116,8 @@ public class PostServlet extends HttpServlet {
         else if(request.getParameter("comment") != null){
             CommentsEntity commentsEntity = new CommentsEntity();
             commentsEntity.setCitationId(citationsEntity.getCitationId());
-            commentsEntity.setUserId(Validate.usersEntity.getUserId());
+            commentsEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+                    .getAttribute(SessionKeys.USER_INFO)).getUserId());
             commentsEntity.setText(request.getParameter("comm"));
             commentsEntity.setCommentDate(new Date(System.currentTimeMillis()));
             session.beginTransaction();

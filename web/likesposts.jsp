@@ -16,7 +16,7 @@
 <div id="content">
     <form action="/likesposts" method="post">
         <%
-            for (CitationsEntity citationsEntity : LikesPostsServlet.getCitations()) {
+            for (CitationsEntity citationsEntity : LikesPostsServlet.getCitations(request)) {
         %>
         <div id="box2">
             <label>
@@ -25,7 +25,7 @@
                 <p><%= citationsEntity.getText() %>
                 </p>
             </label>
-            <input type="submit" value="Info" name=<%= citationsEntity.getCitationId() %>/>
+            <input type="submit" value="Подробней" name=<%= citationsEntity.getCitationId() %>/>
             <%
                 }
             %>

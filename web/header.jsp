@@ -1,4 +1,6 @@
-<%@ page import="webapp.dbutils.Validate" %><%--
+<%@ page import="webapp.dbutils.Validate" %>
+<%@ page import="webapp.entities.UsersEntity" %>
+<%@ page import="webapp.dbutils.SessionKeys" %><%--
   Created by IntelliJ IDEA.
   User: Виктория
   Date: 26.03.2018
@@ -16,37 +18,38 @@
     <div id="header">
         <div id="logo">
             <h1>
-                <a href="#">Aware</a>
+                <a href="index.jsp">Aware</a>
             </h1>
         </div>
         <div id="nav">
             <ul>
                 <%
-                    if (Validate.usersEntity == null) {
+                    if (request.getSession(true)
+                        .getAttribute(SessionKeys.USER_INFO) == null) {
                 %>
                 <li class="first">
-                    <a href="login.jsp"> Login </a>
+                    <a href="login.jsp"> Вход </a>
                 </li>
                 <li>
-                    <a href="registration.jsp"> Registration </a>
+                    <a href="registration.jsp"> Регистрация </a>
                 </li>
                 <li>
-                    <a href="about.jsp">About Us</a>
+                    <a href="about.jsp">О нас</a>
                 </li>
                 <li class="last">
-                    <a href="contacts.jsp">Contact Us</a>
+                    <a href="contacts.jsp">Контакты</a>
                 </li>
                 <%
                 } else {
                 %>
                 <li class="first">
-                    <a href="about.jsp">About Us</a>
+                    <a href="about.jsp">О нас</a>
                 </li>
                 <li>
-                    <a href="contacts.jsp">Contact Us</a>
+                    <a href="contacts.jsp">Контакты</a>
                 </li>
                 <li class="last">
-                    <a href="logout.jsp"> Logout </a>
+                    <a href="logout.jsp"> Выход </a>
                 </li>
                 <% } %>
             </ul>
@@ -59,7 +62,8 @@
             </h3>
             <ul class="linkedList">
                 <%
-                    if (Validate.usersEntity != null) {
+                    if (request.getSession(true)
+                            .getAttribute(SessionKeys.USER_INFO) != null) {
                 %>
                 <li class="first">
                     <a href="citation.jsp"> Добавить цитату </a>

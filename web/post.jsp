@@ -28,12 +28,11 @@
         </label>
         <input type="submit" value="Like" name="like"/>
         <input type="submit" value="Dislike" name="dislike"/>
-        <label><p><b>Comment</b></p></label>
         <input type="text" name="comm" width="300"/>
-        <input type="submit" value="Comment" name="comment"/>
-        <label><p><b>Comments:</b></p></label>
+        <input type="submit" value="Комментарий" name="comment"/>
+        <label><p><b>Комментарии:</b></p></label>
         <% for (CommentsEntity commentsEntity : PostServlet.getComments()) { %>
-        <label><b><%= Validate.getUserName(commentsEntity.getUserId())%>
+        <label><b>Пользователь: <%= Validate.getUserName(commentsEntity.getUserId())%>
         </b></label>
         <label><p><%= commentsEntity.getText()%>
         </p></label>

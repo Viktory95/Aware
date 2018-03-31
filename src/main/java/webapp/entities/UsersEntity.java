@@ -144,4 +144,14 @@ public class UsersEntity {
                 ", level=" + level +
                 '}';
     }
+
+    public static UsersEntity valueOf(Object usersEntity){
+        UsersEntity usersEntity1 = null;
+        try{
+            usersEntity1 = (UsersEntity) usersEntity;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return usersEntity1;
+    }
 }

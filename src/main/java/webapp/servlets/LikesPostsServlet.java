@@ -3,8 +3,10 @@ package webapp.servlets;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import webapp.dbutils.HibernateUtil;
+import webapp.dbutils.SessionKeys;
 import webapp.dbutils.Validate;
 import webapp.entities.CitationsEntity;
+import webapp.entities.UsersEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,12 +50,13 @@ public class LikesPostsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
     }
 
-    public static List<CitationsEntity> getCitations(){
+    public static List<CitationsEntity> getCitations(HttpServletRequest request){
         List<CitationsEntity> listResult = null;
         Session session = HibernateUtil.getSession();
         session.getTransaction();
         Query query = session.createQuery("from CitationsEntity where citationId in (select citationId from LikesEntity where userId = :id)");
-        query.setParameter("id", Validate.usersEntity.getUserId());
+        query.setParameter("id", UsersEntity.valueOf(request.getSession(true)
+                .getAttribute(SessionKeys.USER_INFO)).getUserId());
         listResult = query.list();
         return listResult;
     }

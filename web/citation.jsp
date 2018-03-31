@@ -15,11 +15,11 @@
 <div id="content">
     <div id="box1">
         <form action="/citation" method="post">
-            <label><b>Name</b></label>
+            <label><b>Название</b></label>
             <input type="text" name="citation_name" required>
-            <label><b>Text</b></label>
+            <label><b>Текст</b></label>
             <input type="text" name="citation_text" required>
-            <input type="submit" value="Add"/>
+            <input type="submit" value="Добавить"/>
         </form>
     </div>
 </div>
