@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Home</title>
-    <link href="css/style35.css" rel="stylesheet" type="text/css">
+    <link href="css/style39.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="outer">
@@ -60,11 +60,11 @@
             <h3>
                 Меню
             </h3>
+            <%
+                if (request.getSession(true)
+                        .getAttribute(SessionKeys.USER_INFO) != null) {
+            %>
             <ul class="linkedList">
-                <%
-                    if (request.getSession(true)
-                            .getAttribute(SessionKeys.USER_INFO) != null) {
-                %>
                 <li class="first">
                     <a href="citation.jsp"> Добавить цитату </a>
                 </li>
@@ -77,10 +77,8 @@
                 <li class="last">
                     <a href="popularposts.jsp">Популярное</a>
                 </li>
-                <%
-                    }
-                %>
             </ul>
+            <% } %>
         </div>
 
         <div id="sidebar2">
