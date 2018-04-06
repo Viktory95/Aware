@@ -14,18 +14,20 @@
     <jsp:include page="header.jsp"/>
     <script src="js/jquery.js"></script>
     <script src="js/translate.js"></script>
+    <script src="js/eng_ru.js"></script>
 </head>
-<body>
+<body onmousedown="mouseDown()">
 <div id="content">
     <form action="/post" method="post">
         <label>
             <p><b><%= PostServlet.citationsEntity.getName() %>
             </b></p>
+            <textarea name="citation_text" id="citation_text"
+                      onmouseup="mouseUp()"><%= PostServlet.citationsEntity.getText() %></textarea>
             <div id="tooltip"></div>
-            <textarea name="citation_text" id="citation_text" onmouseup="mouseUp()" onmousedown="mouseDown()"><%= PostServlet.citationsEntity.getText() %></textarea>
-            <p>Language - <%= PostServlet.citationsEntity.getLanguage()%>
-                Likes - <%= PostServlet.citationsEntity.getLikes() %>        Dislikes
-                - <%= PostServlet.citationsEntity.getDislikes() %>
+            <p>Likes - <%= PostServlet.citationsEntity.getLikes() %>
+            </p>
+            <p>Dislikes - <%= PostServlet.citationsEntity.getDislikes() %>
             </p>
         </label>
         <input type="submit" value="Like" name="like"/>
@@ -47,63 +49,7 @@
 </div>
 </div>
 <script type="text/javascript">
-    var dict = {
-        "It was, in fact, one of those places that exist merely so that people can have come from them.": {
-            ru: "Это было дейсвительно одно из тех мест, которые существуют только для того, чтобы люди могли происходить из них."
-        },
-        "It": {
-            ru: "Это"
-        },
-        "was": {
-            ru: "было"
-        },
-        "was,": {
-            ru: "было"
-        },
-        "in fact": {
-            ru: "на самом деле"
-        },
-        "one of": {
-            ru: "одно из"
-        },
-        "those": {
-            ru: "тех"
-        },
-        "places": {
-            ru: "мест"
-        },
-        "that exist": {
-            ru: "которые существуют"
-        },
-        "merely": {
-            ru: "только"
-        },
-        "so that": {
-            ru: "для того, чтобы "
-        },
-        "people": {
-            ru: "люди"
-        },
-        "can": {
-            ru: "могли"
-        },
-        "have come": {
-            ru: "происходить"
-        },
-        "from": {
-            ru: "из"
-        },
-        "them": {
-            ru: "них"
-        },
-        "them.": {
-            ru: "них."
-        },
-        "Download plugin": {
-            ru: "Descarregar plugin",
-            en: "Download plugin"
-        }
-    };
+
     var translator = $('citation_text').translate({lang: "en", t: dict}); //use English
     translator.lang("ru");
 
@@ -116,11 +62,11 @@
             .get(document.getElementById("citation_text")
                 .innerHTML
                 .substring(selectionStart, selectionEnd).trim());
-        $( "#tooltip" ).show();
+        $("#tooltip").show();
     }
-    
+
     function mouseDown() {
-        $( "#tooltip" ).hide( "slow", function() {
+        $("#tooltip").hide("slow", function () {
         });
     }
 </script>
