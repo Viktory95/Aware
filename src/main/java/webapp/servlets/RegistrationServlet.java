@@ -19,6 +19,7 @@ import java.sql.Date;
 @WebServlet(name = "registration")
 public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         if (request.getParameter("rppassword") != null && request.getParameter("password") != null && request.getParameter("password").equals(request.getParameter("rppassword"))) {
             try {

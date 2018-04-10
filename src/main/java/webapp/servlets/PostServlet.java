@@ -23,6 +23,8 @@ public class PostServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+
         Session session = HibernateUtil.getSession();
 
         LikesEntity likesEntity = new LikesEntity();
@@ -142,7 +144,8 @@ public class PostServlet extends HttpServlet {
         List<CommentsEntity> listResult = null;
         Session session = HibernateUtil.getSession();
         session.getTransaction();
-        Query query = session.createQuery("from CommentsEntity");
+        Query query = session.createQuery("from CommentsEntity where citationId = :id");
+        query.setParameter("id", citationsEntity.getCitationId());
         listResult = query.list();
         return listResult;
     }

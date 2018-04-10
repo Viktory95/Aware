@@ -19,6 +19,7 @@ import java.math.BigInteger;
 @WebServlet(name = "citation")
 public class CitationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+        request.setCharacterEncoding("UTF-8");
         if (request.getParameter("citation_name") != null
                 && request.getParameter("citation_text") != null
                 && request.getSession(true)
