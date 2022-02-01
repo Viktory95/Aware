@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.Query;
 import webapp.dbutils.HibernateUtil;
 import webapp.dbutils.SessionKeys;
-import webapp.dbutils.Validate;
 import webapp.entities.*;
 
 import javax.servlet.ServletException;
@@ -19,7 +18,7 @@ import java.util.List;
 @WebServlet(name = "post")
 public class PostServlet extends HttpServlet {
 
-    public static CitationsEntity citationsEntity;
+    public static Citation citation;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
 
@@ -27,25 +26,25 @@ public class PostServlet extends HttpServlet {
 
         Session session = HibernateUtil.getSession();
 
-        LikesEntity likesEntity = new LikesEntity();
-        likesEntity.setCitationId(citationsEntity.getCitationId());
-        likesEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+        Like like = new Like();
+        like.setCitationId(citation.getCitationId());
+        like.setUserId(User.valueOf(request.getSession(true)
                 .getAttribute(SessionKeys.USER_INFO)).getUserId());
 
         Query likesQuery = session.createQuery("from LikesEntity where citationId = :citationId and userId = :userId");
-        likesQuery.setParameter("citationId", citationsEntity.getCitationId());
-        likesQuery.setParameter("userId", UsersEntity.valueOf(request.getSession(true)
+        likesQuery.setParameter("citationId", citation.getCitationId());
+        likesQuery.setParameter("userId", User.valueOf(request.getSession(true)
                 .getAttribute(SessionKeys.USER_INFO)).getUserId());
-        List<LikesEntity> likesListResult = likesQuery.list();
+        List<Like> likesListResult = likesQuery.list();
 
         DislikesEntity dislikesEntity = new DislikesEntity();
-        dislikesEntity.setCitationId(citationsEntity.getCitationId());
-        dislikesEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+        dislikesEntity.setCitationId(citation.getCitationId());
+        dislikesEntity.setUserId(User.valueOf(request.getSession(true)
                 .getAttribute(SessionKeys.USER_INFO)).getUserId());
 
         Query dislikesQuery = session.createQuery("from DislikesEntity where citationId = :citationId and userId = :userId");
-        dislikesQuery.setParameter("citationId", citationsEntity.getCitationId());
-        dislikesQuery.setParameter("userId", UsersEntity.valueOf(request.getSession(true)
+        dislikesQuery.setParameter("citationId", citation.getCitationId());
+        dislikesQuery.setParameter("userId", User.valueOf(request.getSession(true)
                 .getAttribute(SessionKeys.USER_INFO)).getUserId());
         List<DislikesEntity> dislikesListResult = dislikesQuery.list();
 
@@ -57,27 +56,27 @@ public class PostServlet extends HttpServlet {
                     session.beginTransaction();
                     session.delete(dislikesEntity);
                     session.getTransaction().commit();
-                    citationsEntity.setDislikes(citationsEntity.getDislikes() - 1);
+                    citation.setDislikes(citation.getDislikes() - 1);
                 }
-                citationsEntity.setLikes(citationsEntity.getLikes() + 1);
+                citation.setLikes(citation.getLikes() + 1);
 
                 session.beginTransaction();
-                session.update(citationsEntity);
+                session.update(citation);
                 session.getTransaction().commit();
                 session.beginTransaction();
-                session.save(likesEntity);
+                session.save(like);
                 session.getTransaction().commit();
                 System.out.println("LIKE");
             }
             else {
-                citationsEntity.setLikes(citationsEntity.getLikes() - 1);
-                likesEntity = likesListResult.get(0);
+                citation.setLikes(citation.getLikes() - 1);
+                like = likesListResult.get(0);
 
                 session.beginTransaction();
-                session.update(citationsEntity);
+                session.update(citation);
                 session.getTransaction().commit();
                 session.beginTransaction();
-                session.delete(likesEntity);
+                session.delete(like);
                 session.getTransaction().commit();
                 System.out.println("UNLIKE");
             }
@@ -86,16 +85,16 @@ public class PostServlet extends HttpServlet {
 
             if(dislikesListResult.isEmpty()) {
                 if(!likesListResult.isEmpty()){
-                    likesEntity = likesListResult.get(0);
+                    like = likesListResult.get(0);
                     session.beginTransaction();
-                    session.delete(likesEntity);
+                    session.delete(like);
                     session.getTransaction().commit();
-                    citationsEntity.setLikes(citationsEntity.getLikes() - 1);
+                    citation.setLikes(citation.getLikes() - 1);
                 }
-                citationsEntity.setDislikes(citationsEntity.getDislikes() + 1);
+                citation.setDislikes(citation.getDislikes() + 1);
 
                 session.beginTransaction();
-                session.update(citationsEntity);
+                session.update(citation);
                 session.getTransaction().commit();
                 session.beginTransaction();
                 session.save(dislikesEntity);
@@ -103,11 +102,11 @@ public class PostServlet extends HttpServlet {
                 System.out.println("DISLIKE");
             }
             else {
-                citationsEntity.setDislikes(citationsEntity.getDislikes() - 1);
+                citation.setDislikes(citation.getDislikes() - 1);
                 dislikesEntity = dislikesListResult.get(0);
 
                 session.beginTransaction();
-                session.update(citationsEntity);
+                session.update(citation);
                 session.getTransaction().commit();
                 session.beginTransaction();
                 session.delete(dislikesEntity);
@@ -116,14 +115,14 @@ public class PostServlet extends HttpServlet {
             }
         }
         else if(request.getParameter("comment") != null){
-            CommentsEntity commentsEntity = new CommentsEntity();
-            commentsEntity.setCitationId(citationsEntity.getCitationId());
-            commentsEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+            Comment comment = new Comment();
+            comment.setCitationId(citation.getCitationId());
+            comment.setUserId(User.valueOf(request.getSession(true)
                     .getAttribute(SessionKeys.USER_INFO)).getUserId());
-            commentsEntity.setText(request.getParameter("comm"));
-            commentsEntity.setCommentDate(new Date(System.currentTimeMillis()));
+            comment.setText(request.getParameter("comm"));
+            comment.setCommentDate(new Date(System.currentTimeMillis()));
             session.beginTransaction();
-            session.save(commentsEntity);
+            session.save(comment);
             session.getTransaction().commit();
             System.out.println("COMMENT");
         }
@@ -140,12 +139,12 @@ public class PostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
     }
 
-    public static List<CommentsEntity> getComments(){
-        List<CommentsEntity> listResult = null;
+    public static List<Comment> getComments(){
+        List<Comment> listResult = null;
         Session session = HibernateUtil.getSession();
         session.getTransaction();
         Query query = session.createQuery("from CommentsEntity where citationId = :id");
-        query.setParameter("id", citationsEntity.getCitationId());
+        query.setParameter("id", citation.getCitationId());
         listResult = query.list();
         return listResult;
     }

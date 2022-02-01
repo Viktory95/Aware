@@ -1,13 +1,9 @@
 package webapp.servlets;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import webapp.dbutils.HibernateUtil;
 import webapp.dbutils.SessionKeys;
 import webapp.dbutils.Validate;
-import webapp.entities.UsersEntity;
+import webapp.entities.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 @WebServlet(name = "login")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        UsersEntity usersEntity = Validate.checkUser(request.getParameter("loginname"), request.getParameter("password"));
-        if (usersEntity != null) {
+        User user = Validate.checkUser(request.getParameter("loginname"), request.getParameter("password"));
+        if (user != null) {
             request.getSession(true)
                     .setAttribute(SessionKeys.USER_INFO,
                             Validate.checkUser(request.getParameter("loginname"),

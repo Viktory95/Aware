@@ -2,7 +2,7 @@ package webapp.servlets;
 
 import org.hibernate.Session;
 import webapp.dbutils.HibernateUtil;
-import webapp.entities.UsersEntity;
+import webapp.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,19 +30,19 @@ public class RegistrationServlet extends HttpServlet {
                     stringBuilder.append(b);
                 }
 
-                UsersEntity usersEntity = new UsersEntity();
+                User user = new User();
 
-                usersEntity.setLogin(request.getParameter("loginname"));
-                usersEntity.setName(request.getParameter("loginname"));
-                usersEntity.setEmail(request.getParameter("email"));
-                usersEntity.setPassword(stringBuilder.toString());
-                usersEntity.setLevel(new BigInteger(String.valueOf(0)));
-                usersEntity.setRegisterDate(new Date(System.currentTimeMillis()));
-                usersEntity.setLastVisitDate(new Date(System.currentTimeMillis()));
+                user.setLogin(request.getParameter("loginname"));
+                user.setName(request.getParameter("loginname"));
+                user.setEmail(request.getParameter("email"));
+                user.setPassword(stringBuilder.toString());
+                user.setLevel(new BigInteger(String.valueOf(0)));
+                user.setRegisterDate(new Date(System.currentTimeMillis()));
+                user.setLastVisitDate(new Date(System.currentTimeMillis()));
 
                 Session session = HibernateUtil.getSession();
                 session.beginTransaction();
-                session.save(usersEntity);
+                session.save(user);
                 session.getTransaction().commit();
                 session.close();
             } catch (NoSuchAlgorithmException e) {

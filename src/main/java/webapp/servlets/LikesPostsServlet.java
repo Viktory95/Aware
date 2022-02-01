@@ -4,9 +4,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import webapp.dbutils.HibernateUtil;
 import webapp.dbutils.SessionKeys;
-import webapp.dbutils.Validate;
-import webapp.entities.CitationsEntity;
-import webapp.entities.UsersEntity;
+import webapp.entities.Citation;
+import webapp.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +32,8 @@ public class LikesPostsServlet extends HttpServlet {
             session.getTransaction();
             Query query = session.createQuery("from CitationsEntity where citationId = :id");
             query.setParameter("id", citationId);
-            List<CitationsEntity> listResult = query.list();
-            PostServlet.citationsEntity = listResult.isEmpty() ? null : listResult.get(0);
+            List<Citation> listResult = query.list();
+            PostServlet.citation = listResult.isEmpty() ? null : listResult.get(0);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,12 +49,12 @@ public class LikesPostsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
     }
 
-    public static List<CitationsEntity> getCitations(HttpServletRequest request){
-        List<CitationsEntity> listResult = null;
+    public static List<Citation> getCitations(HttpServletRequest request){
+        List<Citation> listResult = null;
         Session session = HibernateUtil.getSession();
         session.getTransaction();
         Query query = session.createQuery("from CitationsEntity where citationId in (select citationId from LikesEntity where userId = :id)");
-        query.setParameter("id", UsersEntity.valueOf(request.getSession(true)
+        query.setParameter("id", User.valueOf(request.getSession(true)
                 .getAttribute(SessionKeys.USER_INFO)).getUserId());
         listResult = query.list();
         return listResult;

@@ -3,8 +3,7 @@ package webapp.servlets;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import webapp.dbutils.HibernateUtil;
-import webapp.dbutils.Validate;
-import webapp.entities.CitationsEntity;
+import webapp.entities.Citation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +30,8 @@ public class PopularPostsServlet extends HttpServlet {
             session.getTransaction();
             Query query = session.createQuery("from CitationsEntity where citationId = :id");
             query.setParameter("id", citationId);
-            List<CitationsEntity> listResult = query.list();
-            PostServlet.citationsEntity = listResult.isEmpty() ? null : listResult.get(0);
+            List<Citation> listResult = query.list();
+            PostServlet.citation = listResult.isEmpty() ? null : listResult.get(0);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,8 +47,8 @@ public class PopularPostsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
     }
 
-    public static List<CitationsEntity> getCitations(){
-        List<CitationsEntity> listResult = null;
+    public static List<Citation> getCitations(){
+        List<Citation> listResult = null;
         Session session = HibernateUtil.getSession();
         session.getTransaction();
         Query query = session.createQuery("from CitationsEntity where likes > 0 order by likes desc");

@@ -2,16 +2,16 @@ package webapp.dbutils;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import webapp.entities.CitationsEntity;
-import webapp.entities.UsersEntity;
+import webapp.entities.Citation;
+import webapp.entities.User;
 
 import java.security.MessageDigest;
 import java.util.List;
 
 public class Validate {
 
-    public static UsersEntity checkUser(String login, String pass) {
-        UsersEntity usersEntity = null;
+    public static User checkUser(String login, String pass) {
+        User user = null;
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             byte[] bytes = messageDigest.digest(pass.getBytes("UTF-8"));
@@ -24,13 +24,13 @@ public class Validate {
             Query query = session.createQuery("from UsersEntity where login = :log and password = :pass");
             query.setParameter("log", login);
             query.setParameter("pass", stringBuilder.toString());
-            List<UsersEntity> listResult = query.list();
-            usersEntity = listResult.isEmpty() ? null : listResult.get(0);
+            List<User> listResult = query.list();
+            user = listResult.isEmpty() ? null : listResult.get(0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return usersEntity;
+        return user;
     }
 
     public static String getUserName(long userId){
@@ -41,7 +41,7 @@ public class Validate {
             session.getTransaction();
             Query query = session.createQuery("from UsersEntity where userId = :id");
             query.setParameter("id", userId);
-            List<UsersEntity> listResult = query.list();
+            List<User> listResult = query.list();
             userName = listResult.isEmpty() ? "" : listResult.get(0).getName();
 
         } catch (Exception e) {
@@ -50,19 +50,19 @@ public class Validate {
         return userName;
     }
 
-    public static CitationsEntity getDayCitation(){
-        CitationsEntity citationsEntity =  new CitationsEntity();
+    public static Citation getDayCitation(){
+        Citation citation =  new Citation();
         try {
 
             Session session = HibernateUtil.getSession();
             session.getTransaction();
             Query query = session.createQuery("from CitationsEntity order by likes desc ");
-            List<CitationsEntity> listResult = query.list();
-            citationsEntity = listResult.isEmpty() ? new CitationsEntity() : listResult.get(0);
+            List<Citation> listResult = query.list();
+            citation = listResult.isEmpty() ? new Citation() : listResult.get(0);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return citationsEntity;
+        return citation;
     }
 }

@@ -3,9 +3,8 @@ package webapp.servlets;
 import org.hibernate.Session;
 import webapp.dbutils.HibernateUtil;
 import webapp.dbutils.SessionKeys;
-import webapp.dbutils.Validate;
-import webapp.entities.CitationsEntity;
-import webapp.entities.UsersEntity;
+import webapp.entities.Citation;
+import webapp.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,18 +23,18 @@ public class CitationServlet extends HttpServlet {
                 && request.getParameter("citation_text") != null
                 && request.getSession(true)
                 .getAttribute(SessionKeys.USER_INFO) != null) {
-            CitationsEntity citationsEntity = new CitationsEntity();
-            citationsEntity.setName(request.getParameter("citation_name"));
-            citationsEntity.setText(request.getParameter("citation_text"));
-            citationsEntity.setPopularity(new BigInteger("0"));
-            citationsEntity.setUserId(UsersEntity.valueOf(request.getSession(true)
+            Citation citation = new Citation();
+            citation.setName(request.getParameter("citation_name"));
+            citation.setText(request.getParameter("citation_text"));
+            citation.setPopularity(new BigInteger("0"));
+            citation.setUserId(User.valueOf(request.getSession(true)
                     .getAttribute(SessionKeys.USER_INFO)).getUserId());
-            citationsEntity.setLikes(0);
-            citationsEntity.setDislikes(0);
+            citation.setLikes(0);
+            citation.setDislikes(0);
 
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
-            session.save(citationsEntity);
+            session.save(citation);
             session.getTransaction().commit();
             session.close();
             try {
