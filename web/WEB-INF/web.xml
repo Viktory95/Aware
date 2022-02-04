@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>login</servlet-name>
-        <servlet-class>webapp.servlets.LoginServlet</servlet-class>
+        <servlet-class>com.vi.servlets.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>registration</servlet-name>
-        <servlet-class>webapp.servlets.RegistrationServlet</servlet-class>
+        <servlet-class>com.vi.servlets.RegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>citation</servlet-name>
-        <servlet-class>webapp.servlets.CitationServlet</servlet-class>
+        <servlet-class>com.vi.servlets.CitationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -36,7 +36,7 @@
 
     <servlet>
         <servlet-name>posts</servlet-name>
-        <servlet-class>webapp.servlets.PostsServlet</servlet-class>
+        <servlet-class>com.vi.servlets.PostsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -46,7 +46,7 @@
 
     <servlet>
         <servlet-name>post</servlet-name>
-        <servlet-class>webapp.servlets.PostServlet</servlet-class>
+        <servlet-class>com.vi.servlets.PostServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -56,7 +56,7 @@
 
     <servlet>
         <servlet-name>likesposts</servlet-name>
-        <servlet-class>webapp.servlets.LikesPostsServlet</servlet-class>
+        <servlet-class>com.vi.servlets.LikesPostsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -66,7 +66,7 @@
 
     <servlet>
         <servlet-name>popularposts</servlet-name>
-        <servlet-class>webapp.servlets.PopularPostsServlet</servlet-class>
+        <servlet-class>com.vi.servlets.PopularPostsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
