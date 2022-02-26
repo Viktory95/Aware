@@ -11,7 +11,7 @@ import java.sql.Date;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "comments", schema = "aware_schema", catalog = "postgres")
+@Table(name = "comment", schema = "aware_schema", catalog = "aware")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

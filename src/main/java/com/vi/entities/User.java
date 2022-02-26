@@ -12,7 +12,7 @@ import java.sql.Date;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "users", schema = "aware_schema", catalog = "postgres")
+@Table(name = "user", schema = "aware_schema", catalog = "aware")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

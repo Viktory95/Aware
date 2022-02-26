@@ -10,7 +10,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "citations", schema = "aware_schema", catalog = "postgres")
+@Table(name = "citation", schema = "aware_schema", catalog = "aware")
 public class Citation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

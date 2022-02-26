@@ -10,7 +10,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "likes", schema = "aware_schema", catalog = "postgres")
+@Table(name = "like", schema = "aware_schema", catalog = "aware")
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
