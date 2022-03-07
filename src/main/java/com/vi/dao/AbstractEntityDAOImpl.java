@@ -1,10 +1,9 @@
 package com.vi.dao;
 
+import com.vi.dbutils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import com.vi.dbutils.HibernateUtil;
 
-import javax.persistence.Table;
 import java.util.List;
 
 public class AbstractEntityDAOImpl<T> implements EntityDAO<T> {
@@ -21,17 +20,16 @@ public class AbstractEntityDAOImpl<T> implements EntityDAO<T> {
 
     @Override
     public List<T> getAll() {
-        System.out.println("clazz.getAnnotation(Table.class)");
-        System.out.println(clazz.getAnnotation(Table.class));
         List<T> entities = (List<T>) HibernateUtil
                 .getSession()
-                .createQuery("From " + clazz.getAnnotation(Table.class))
+                .createQuery("From " + clazz.getSimpleName())
                 .list();
         return entities;
     }
 
     @Override
     public void delete(long id) {
+        //TODO: find out what is CriteriaDelete and if I can use it here
         Session session = HibernateUtil.getSession();
         T t = (T) HibernateUtil.getSession().get(clazz, id);
         Transaction tx1 = session.beginTransaction();

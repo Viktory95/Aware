@@ -1,10 +1,10 @@
 package com.vi.dao;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import com.vi.dbutils.HibernateUtil;
 import com.vi.entities.Citation;
 import com.vi.entities.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +25,7 @@ public class CitationDAOImpl extends AbstractEntityDAOImpl<Citation> implements 
                 .language(language)
                 .build());
         tx1.commit();
-        Citation citation = (Citation) session.createQuery("SELECT * FROM citations WHERE text = :text AND name = :name AND user_id = :user_id AND language = :language")
+        Citation citation = (Citation) session.createQuery("FROM Citation WHERE text = :text AND name = :name AND user_id = :user_id AND language = :language")
                 .setParameter("text", text)
                 .setParameter("name", name)
                 .setParameter("user_id", userId)

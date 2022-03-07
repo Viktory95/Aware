@@ -6,8 +6,10 @@ import com.vi.dbutils.HibernateUtil;
 import com.vi.entities.Citation;
 import com.vi.entities.Comment;
 import com.vi.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
 import java.sql.Date;
 
 @Component
@@ -28,7 +30,7 @@ public class CommentDAOImpl extends AbstractEntityDAOImpl<Comment> implements Co
                 .commentDate(commentDate)
                 .build());
         tx1.commit();
-        Comment comment = (Comment) session.createQuery("SELECT * FROM comment WHERE citation_id = :citation_id AND text = :text AND user_id = :user_id AND commentDate = :commentDate")
+        Comment comment = (Comment) session.createQuery("FROM Comment WHERE citation_id = :citation_id AND text = :text AND user_id = :user_id AND commentDate = :commentDate")
                 .setParameter("citation_id", citationId)
                 .setParameter("text", text)
                 .setParameter("user_id", userId)

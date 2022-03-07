@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
     @Bean
-    public HibernateTest getHibernateTest() {
-        return new HibernateTest();
+    public UserTest getHibernateTest() {
+        return new UserTest();
     }
 }

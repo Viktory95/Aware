@@ -6,7 +6,10 @@ import com.vi.dbutils.HibernateUtil;
 import com.vi.entities.Citation;
 import com.vi.entities.Like;
 import com.vi.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.EntityManager;
 
 @Component
 public class LikeDAOImpl extends AbstractEntityDAOImpl<Like> implements LikeDAO {
@@ -26,7 +29,7 @@ public class LikeDAOImpl extends AbstractEntityDAOImpl<Like> implements LikeDAO 
                 .isShared(isShared)
                 .build());
         tx1.commit();
-        Like like = (Like) session.createQuery("SELECT * FROM like WHERE citation_id = :citation_id AND is_like = :is_like AND user_id = :user_id AND is_shared = :is_shared")
+        Like like = (Like) session.createQuery("FROM Like WHERE citation_id = :citation_id AND is_like = :is_like AND user_id = :user_id AND is_shared = :is_shared")
                 .setParameter("citation_id", citationId)
                 .setParameter("is_like", isLike)
                 .setParameter("user_id", userId)

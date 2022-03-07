@@ -1,6 +1,10 @@
 package com.vi.dbutils;
 
 
+import com.vi.entities.Citation;
+import com.vi.entities.Comment;
+import com.vi.entities.Like;
+import com.vi.entities.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,8 +16,12 @@ public class HibernateUtil {
 
     static {
         try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
+            Configuration configuration = new Configuration()
+                    .addAnnotatedClass(User.class)
+                    .addAnnotatedClass(Citation.class)
+                    .addAnnotatedClass(Comment.class)
+                    .addAnnotatedClass(Like.class)
+                    .configure();
 
             sessionFactory = configuration.buildSessionFactory();
         } catch (Throwable ex) {

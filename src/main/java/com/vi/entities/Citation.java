@@ -8,9 +8,11 @@ import javax.persistence.*;
 @Setter
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "citation", schema = "aware_schema", catalog = "aware")
+@Table(name = "citation")
 public class Citation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
