@@ -36,6 +36,7 @@ public class CommentDAOImpl extends AbstractEntityDAOImpl<Comment> implements Co
                 .setParameter("user_id", userId)
                 .setParameter("commentDate", commentDate)
                 .uniqueResult();
+        session.close();
         return comment;
     }
 
@@ -51,6 +52,7 @@ public class CommentDAOImpl extends AbstractEntityDAOImpl<Comment> implements Co
                 .commentDate(commentDate)
                 .build());
         tx1.commit();
+        session.close();
         return findById(commentId);
     }
 }

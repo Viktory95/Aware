@@ -3,7 +3,7 @@ package com.vi.dbutils;
 
 import com.vi.entities.Citation;
 import com.vi.entities.Comment;
-import com.vi.entities.Like;
+import com.vi.entities.Opinion;
 import com.vi.entities.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -20,7 +20,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Citation.class)
                     .addAnnotatedClass(Comment.class)
-                    .addAnnotatedClass(Like.class)
+                    .addAnnotatedClass(Opinion.class)
                     .configure();
 
             sessionFactory = configuration.buildSessionFactory();

@@ -12,20 +12,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "like")
-public class Like {
+@Table(name = "opinion")
+public class Opinion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "like_id")
-    private long likeId;
+    @Column(name = "opinion_id")
+    private long opinionId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "citation_id")
     private Citation citation;
-    @JoinColumn(name = "is_like")
-    private boolean isLike;
-    @JoinColumn(name = "is_shared")
-    private boolean isShared;
+    @JoinColumn(name = "liked")
+    private int liked;
+    @JoinColumn(name = "shared")
+    private int shared;
 }

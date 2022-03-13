@@ -37,6 +37,7 @@ public class UserDAOImpl extends AbstractEntityDAOImpl<User> implements UserDAO 
                 .setParameter("email", email)
                 .setParameter("name", name)
                 .uniqueResult();
+        session.close();
         return user;
     }
 
@@ -55,6 +56,7 @@ public class UserDAOImpl extends AbstractEntityDAOImpl<User> implements UserDAO 
                 .level(BigInteger.valueOf(level))
                 .build());
         tx1.commit();
+        session.close();
         return findById(userId);
     }
 }

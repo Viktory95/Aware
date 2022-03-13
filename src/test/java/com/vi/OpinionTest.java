@@ -1,10 +1,10 @@
 package com.vi;
 
 import com.vi.dao.CitationDAO;
-import com.vi.dao.LikeDAO;
+import com.vi.dao.OpinionDAO;
 import com.vi.dao.UserDAO;
 import com.vi.entities.Citation;
-import com.vi.entities.Like;
+import com.vi.entities.Opinion;
 import com.vi.entities.User;
 import com.vi.main.Application;
 import org.junit.jupiter.api.Assertions;
@@ -19,9 +19,9 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {Application.class})
-public class LikeTest {
+public class OpinionTest {
     @Autowired
-    private LikeDAO likeDAO;
+    private OpinionDAO opinionDAO;
     @Autowired
     private UserDAO userDAO;
     @Autowired
@@ -29,8 +29,8 @@ public class LikeTest {
 
     @Test
     public void testLikeMapping() {
-        List<Like> likes = likeDAO.getAll();
-        Assertions.assertNotNull(likes, "Couldn't get any data from Like table.");
+        List<Opinion> likeEntities = opinionDAO.getAll();
+        Assertions.assertNotNull(likeEntities, "Couldn't get any data from Like table.");
 
         User userPosted = userDAO.create("test", "test", "test@mail.ru", "Test", new Date(System.currentTimeMillis()), null, 0);
         Assertions.assertNotNull(userPosted, "Couldn't create new User as citation author object in DB for Like testing.");
@@ -41,14 +41,14 @@ public class LikeTest {
         Citation citation = citationDAO.create("Text test.", "Citation test name", userPosted.getUserId(), "eng");
         Assertions.assertNotNull(citation, "Couldn't create new Citation object in DB for Like testing.");
 
-        Like like = likeDAO.create(citation.getCitationId(), userLiked.getUserId(), true, false);
-        Assertions.assertNotNull(like, "Couldn't create new Like object in DB.");
+        Opinion opinion = opinionDAO.create(citation.getCitationId(), userLiked.getUserId(), 1, 0);
+        Assertions.assertNotNull(opinion, "Couldn't create new Like object in DB.");
 
-        long likeId = like.getLikeId();
-        like = likeDAO.update(likeId, citation.getCitationId(), userLiked.getUserId(), false, false);
-        Assertions.assertNotNull(like, "Couldn't update Like object with id " + likeId + " in DB.");
+        long opinionId = opinion.getOpinionId();
+        opinion = opinionDAO.update(opinionId, citation.getCitationId(), userLiked.getUserId(), 0, 0);
+        Assertions.assertNotNull(opinion, "Couldn't update Opinion object with id " + opinionId + " in DB.");
 
-        likeDAO.delete(like.getLikeId());
+        opinionDAO.delete(opinion.getOpinionId());
         citationDAO.delete(citation.getCitationId());
         userDAO.delete(userPosted.getUserId());
         userDAO.delete(userLiked.getUserId());

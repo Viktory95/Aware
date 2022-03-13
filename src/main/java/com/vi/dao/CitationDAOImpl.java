@@ -31,6 +31,7 @@ public class CitationDAOImpl extends AbstractEntityDAOImpl<Citation> implements 
                 .setParameter("user_id", userId)
                 .setParameter("language", language)
                 .uniqueResult();
+        session.close();
         return citation;
     }
 
@@ -46,6 +47,7 @@ public class CitationDAOImpl extends AbstractEntityDAOImpl<Citation> implements 
                 .language(language)
                 .build());
         tx1.commit();
+        session.close();
         return findById(citationId);
     }
 }
